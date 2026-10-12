@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -43,7 +44,6 @@ public class Main {
         heroAt.add(12);
         heroAt.add(13);
 
-
         Random r= new Random(42);
 
         int i;
@@ -56,16 +56,75 @@ public class Main {
 
         System.out.println();
 
-        System.out.println("Choose your fighter (Input Hero Number and press Enter):");
-
         Scanner heroChoice = new Scanner(System.in);
-        int playerChoice = heroChoice.nextInt();
+
+        int playerChoice = 0;
+
+        while (true) {
+            try {
+                System.out.println("Choose your fighter (Input Hero Number and press Enter.):");
+                playerChoice = heroChoice.nextInt();
+
+                if (playerChoice >= 1 && playerChoice <= heroNumber.size()) {
+                    break;
+                }
+
+                System.out.println("Error: Please enter a valid Hero Number!");
+
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid Hero Number!");
+                heroChoice.next();
+            }
+        }
 
         System.out.println();
 
-        System.out.println("Choose your opponent (Input Hero Number and press Enter):");
+        int opponentChoice = 0;
 
-        int opponentChoice = heroChoice.nextInt();
+        int opponentType = 0;
+
+        while (true) {
+            try {
+                System.out.println("Choose your opponent or pick one at random? (1 for choice, 0 for random):");
+                opponentType = heroChoice.nextInt();
+
+                if (opponentType == 1 || opponentType == 0) {
+                    break;
+                }
+
+                System.out.println("Error: Please choose a valid modi!");
+
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please choose a valid modi!");
+                heroChoice.next();
+            }
+        }
+
+        if (opponentType == 1) {
+            while (true) {
+                try {
+                    System.out.println("Choose your opponent (Input Hero Number and press Enter, don't pick your Hero again!):");
+                    opponentChoice = heroChoice.nextInt();
+
+                    if (opponentChoice >= 1 && opponentChoice <= heroNumber.size() && opponentChoice != playerChoice) {
+                        break;
+                    }
+
+                    System.out.println("Error: Please enter a valid Hero Number!");
+
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Please enter a valid Hero Number!");
+                    heroChoice.next();
+                }
+            }
+        }
+        else {
+            do {
+                opponentChoice = r.nextInt(heroNumber.size()) + 1;
+            } while (opponentChoice == playerChoice);
+        }
+
+
 
         System.out.println();
 
@@ -73,7 +132,7 @@ public class Main {
 
             int damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5);
 
-            System.out.println(heroNames.get(playerChoice - 1) + " attakiert " + heroNames.get(opponentChoice - 1) + "!");
+            System.out.println(heroNames.get(playerChoice - 1) + " attackiert " + heroNames.get(opponentChoice - 1) + "!");
 
             System.out.println(heroNames.get(playerChoice - 1) + " fügt " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " Schaden zu!");
             System.out.println("Übrige HP von " + heroNames.get(opponentChoice - 1) + ": " + (heroHp.get(opponentChoice - 1) - damagePlayer));
@@ -85,7 +144,7 @@ public class Main {
 
                 int damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5);
 
-                System.out.println(heroNames.get(opponentChoice - 1) + " attakiert " + heroNames.get(playerChoice - 1) + "!");
+                System.out.println(heroNames.get(opponentChoice - 1) + " attackiert " + heroNames.get(playerChoice - 1) + "!");
                 System.out.println(heroNames.get(opponentChoice - 1) + " fügt " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " Schaden zu!");
                 System.out.println("Übrige HP von " + heroNames.get(playerChoice - 1) + ": " + (heroHp.get(playerChoice - 1) - damageOpponent));
                 heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
