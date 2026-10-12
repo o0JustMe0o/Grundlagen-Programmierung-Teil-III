@@ -44,7 +44,7 @@ public class Main {
         heroAt.add(13);
 
 
-        Random r= new Random();
+        Random r= new Random(42);
 
         int i;
 
@@ -56,38 +56,50 @@ public class Main {
 
         System.out.println();
 
+        System.out.println("Choose your fighter (Input Hero Number and press Enter):");
 
-        while (heroHp.get(0) > 0 && heroHp.get(1) > 0) {
+        Scanner heroChoice = new Scanner(System.in);
+        int playerChoice = heroChoice.nextInt();
 
-            Integer damage1 = heroAt.get(0) + r.nextInt(5);
+        System.out.println();
 
-            System.out.println(heroNames.get(0) + " attakiert " + heroNames.get(1) + "!");
+        System.out.println("Choose your opponent (Input Hero Number and press Enter):");
 
-            System.out.println(heroNames.get(0) + " fügt " + heroNames.get(1) + " " + damage1 + " Schaden zu!");
-            System.out.println("Übrige HP von " + heroNames.get(1) + ": " + (heroHp.get(1) - heroAt.get(0)));
-            heroHp.set(1, heroHp.get(1) - heroAt.get(0));
+        int opponentChoice = heroChoice.nextInt();
 
-            if (heroHp.get(1) > 0) {
+        System.out.println();
 
-                Integer damage2 = heroAt.get(0) + r.nextInt(5);
+        while (heroHp.get(playerChoice - 1) > 0 && heroHp.get(opponentChoice - 1) > 0) {
 
-                System.out.println();
+            int damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5);
 
-                System.out.println(heroNames.get(1) + " attakiert " + heroNames.get(0) + "!");
-                System.out.println(heroNames.get(1) + " fügt " + heroNames.get(0) + " " + damage2 + " Schaden zu!");
-                System.out.println("Übrige HP von " + heroNames.get(0) + ": " + (heroHp.get(0) - heroAt.get(1)));
-                heroHp.set(0, heroHp.get(0) - heroAt.get(1));
+            System.out.println(heroNames.get(playerChoice - 1) + " attakiert " + heroNames.get(opponentChoice - 1) + "!");
+
+            System.out.println(heroNames.get(playerChoice - 1) + " fügt " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " Schaden zu!");
+            System.out.println("Übrige HP von " + heroNames.get(opponentChoice - 1) + ": " + (heroHp.get(opponentChoice - 1) - damagePlayer));
+            heroHp.set(opponentChoice - 1, heroHp.get(opponentChoice - 1) - damagePlayer);
+
+            System.out.println();
+
+            if (heroHp.get(opponentChoice - 1) > 0) {
+
+                int damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5);
+
+                System.out.println(heroNames.get(opponentChoice - 1) + " attakiert " + heroNames.get(playerChoice - 1) + "!");
+                System.out.println(heroNames.get(opponentChoice - 1) + " fügt " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " Schaden zu!");
+                System.out.println("Übrige HP von " + heroNames.get(playerChoice - 1) + ": " + (heroHp.get(playerChoice - 1) - damageOpponent));
+                heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
 
                 System.out.println();
             }
             else  {
-                System.out.println(heroNames.get(0) + " hat gewonnen! " + heroNames.get(1) + " wurde besiegt!");
+                System.out.println(heroNames.get(playerChoice - 1) + " hat gewonnen! " + heroNames.get(opponentChoice - 1) + " wurde besiegt!");
                 break;
             }
         }
 
-        if (heroHp.get(0) < 0) {
-            System.out.println(heroNames.get(1) + " hat gewonnen! " + heroNames.get(0) + " wurde besiegt!");
+        if (heroHp.get(playerChoice - 1) < 0) {
+            System.out.println(heroNames.get(opponentChoice - 1) + " hat gewonnen! " + heroNames.get(playerChoice - 1) + " wurde besiegt!");
         }
 
     }
