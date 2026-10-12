@@ -43,5 +43,52 @@ public class Main {
         heroAt.add(12);
         heroAt.add(13);
 
+
+        Random r= new Random();
+
+        int i;
+
+        System.out.println("Meet the heros: ");
+
+        for (i = 0; i < heroNumber.size(); i++) {
+            System.out.println(heroNumber.get(i) + ": " + heroNames.get(i));
+        }
+
+        System.out.println();
+
+
+        while (heroHp.get(0) > 0 && heroHp.get(1) > 0) {
+
+            Integer damage1 = heroAt.get(0) + r.nextInt(5);
+
+            System.out.println(heroNames.get(0) + " attakiert " + heroNames.get(1) + "!");
+
+            System.out.println(heroNames.get(0) + " fügt " + heroNames.get(1) + " " + damage1 + " Schaden zu!");
+            System.out.println("Übrige HP von " + heroNames.get(1) + ": " + (heroHp.get(1) - heroAt.get(0)));
+            heroHp.set(1, heroHp.get(1) - heroAt.get(0));
+
+            if (heroHp.get(1) > 0) {
+
+                Integer damage2 = heroAt.get(0) + r.nextInt(5);
+
+                System.out.println();
+
+                System.out.println(heroNames.get(1) + " attakiert " + heroNames.get(0) + "!");
+                System.out.println(heroNames.get(1) + " fügt " + heroNames.get(0) + " " + damage2 + " Schaden zu!");
+                System.out.println("Übrige HP von " + heroNames.get(0) + ": " + (heroHp.get(0) - heroAt.get(1)));
+                heroHp.set(0, heroHp.get(0) - heroAt.get(1));
+
+                System.out.println();
+            }
+            else  {
+                System.out.println(heroNames.get(0) + " hat gewonnen! " + heroNames.get(1) + " wurde besiegt!");
+                break;
+            }
+        }
+
+        if (heroHp.get(0) < 0) {
+            System.out.println(heroNames.get(1) + " hat gewonnen! " + heroNames.get(0) + " wurde besiegt!");
+        }
+
     }
 }
