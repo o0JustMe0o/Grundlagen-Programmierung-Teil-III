@@ -39,6 +39,12 @@ public class Main {
             heroClass.add("Fighter");   // extra damage +8 every 3 turns
             heroClass.add("Mage");      // "I cast shield!" full damage negation every 5 turns
 
+            ArrayList<String> classSpecial = new ArrayList<>();
+            classSpecial.add("+3 extra Def (damage reduction)");
+            classSpecial.add("Sneak Attack every 4 turns (double damage)");
+            classSpecial.add("Action Surge every 3 turns (+8 damage)");
+            classSpecial.add("Shield cast every 5 turns (full damage negation)");
+
             ArrayList<Integer> heroHp = new ArrayList<>();
             heroHp.add(120);
             heroHp.add(80);
@@ -92,7 +98,7 @@ public class Main {
                         int i;
 
                         for (i = 0; i < heroNumber.size(); i++) {
-                            System.out.println(heroNumber.get(i) + ": " + heroNames.get(i) + " (" +  heroClass.get(i) + ", HP: "  + heroHp.get(i) + ", Atk: " + heroAt.get(i) + ")");
+                            System.out.println(heroNumber.get(i) + ": " + heroNames.get(i) + " Stats: HP - "  + heroHp.get(i) + ", Atk - " + heroAt.get(i) + ", Def - " + heroDef.get(i) + ", " + heroClass.get(i) + " - " + classSpecial.get(i));
                         }
 
                         System.out.println();
@@ -188,14 +194,12 @@ public class Main {
                                     playerTurnCount++;
 
                                     switch (heroClass.get(playerChoice - 1)) {
-
-
                                         case "Rouge":
                                             if (playerTurnCount % 4 != 0) {
                                                 damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
                                             }
                                             else {
-                                                System.out.println("Sneak attack!");
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Sneak attack!");
                                                 damagePlayer = ((heroAt.get(playerChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(opponentChoice -1);
                                             }
                                             break;
@@ -205,7 +209,7 @@ public class Main {
                                                 damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
                                             }
                                             else {
-                                                System.out.println("Action Surge! *bonk* *bonk* *bonk*");
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
                                                 damagePlayer = (heroAt.get(playerChoice - 1) + r.nextInt(5) + 8 ) - heroDef.get(opponentChoice -1);
                                             }
                                             break;
@@ -216,7 +220,7 @@ public class Main {
 
 
                                     if (heroClass.get(opponentChoice -1).equals("Paladin")) {
-                                        damagePlayer = heroAt.get((playerChoice - 1) + r.nextInt(5) - 3) - heroDef.get(opponentChoice -1);
+                                        damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1) - 3;
                                     }
 
                                     if (heroClass.get(opponentChoice -1).equals("Mage") && playerTurnCount % 5 == 0) {
@@ -241,14 +245,12 @@ public class Main {
                                         opponentTurnCount++;
 
                                         switch (heroClass.get(opponentChoice - 1)) {
-
-
                                             case "Rouge":
                                                 if (opponentTurnCount % 4 != 0) {
                                                     damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
                                                 }
                                                 else {
-                                                    System.out.println("Sneak attack!");
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Sneak attack!");
                                                     damageOpponent = ((heroAt.get(opponentChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(playerChoice -1);
                                                 }
                                                 break;
@@ -258,7 +260,7 @@ public class Main {
                                                     damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
                                                 }
                                                 else {
-                                                    System.out.println("Action Surge! *bonk* *bonk* *bonk*");
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
                                                     damageOpponent = (heroAt.get(opponentChoice - 1) + r.nextInt(5) + 8 ) - heroDef.get(playerChoice -1);
                                                 }
                                                 break;
