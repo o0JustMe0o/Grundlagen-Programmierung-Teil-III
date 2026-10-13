@@ -34,10 +34,10 @@ public class Main {
             heroNames.add("Luna");
 
             ArrayList<String> heroClass = new ArrayList<>();
-            heroClass.add("Paladin");
-            heroClass.add("Rouge");
-            heroClass.add("Fighter");
-            heroClass.add("Mage");
+            heroClass.add("Paladin");   // extra defense +3
+            heroClass.add("Rouge");     // crit hit (double damage) after 4 tuns
+            heroClass.add("Fighter");   // extra damage +8 every 3 turns
+            heroClass.add("Mage");      // "I cast shield!" full damage negation every 5 turns
 
             ArrayList<Integer> heroHp = new ArrayList<>();
             heroHp.add(120);
@@ -72,8 +72,8 @@ public class Main {
             System.out.println("Exit (1)");
 
             System.out.println();
-            System.out.println("Battle Royale Rounds: " + counterBR);
-            System.out.println("Tournament Rounds: " + counterTourn);
+            System.out.println("Battle Royale rounds: " + counterBR);
+            System.out.println("Tournament rounds: " + counterTourn);
             System.out.println();
 
             //menu choice
@@ -102,6 +102,7 @@ public class Main {
                             System.out.println("Choose your play mode:");
                             System.out.println("Player vs PC (0)");
                             System.out.println("Battle Royale (1)");
+                            System.out.println("Tournament (2)");
                             playModi = userInput.nextInt();
 
                             if (playModi == 0) {
@@ -148,6 +149,9 @@ public class Main {
                                 }
 
                                 if (opponentType == 0) {
+
+                                    System.out.println("The battle commences!");
+
                                     while (true) {
                                         try {
                                             System.out.println("Choose your opponent (Input Hero Number and press Enter, don't pick your Hero again!):");
@@ -173,25 +177,108 @@ public class Main {
 
                                 System.out.println();
 
+                                int playerTurnCount = 0;
+                                int opponentTurnCount = 0;
+
                                 //combat loop
                                 while (heroHp.get(playerChoice - 1) > 0 && heroHp.get(opponentChoice - 1) > 0) {
 
-                                    int damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5);
+                                    int damagePlayer;
+
+                                    playerTurnCount++;
+
+                                    switch (heroClass.get(playerChoice - 1)) {
+
+
+                                        case "Rouge":
+                                            if (playerTurnCount % 4 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                            }
+                                            else {
+                                                System.out.println("Sneak attack!");
+                                                damagePlayer = ((heroAt.get(playerChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(opponentChoice -1);
+                                            }
+                                            break;
+
+                                        case "Fighter":
+                                            if (playerTurnCount % 3 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                            }
+                                            else {
+                                                System.out.println("Action Surge! *bonk* *bonk* *bonk*");
+                                                damagePlayer = (heroAt.get(playerChoice - 1) + r.nextInt(5) + 8 ) - heroDef.get(opponentChoice -1);
+                                            }
+                                            break;
+
+                                        default:
+                                            damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                    }
+
+
+                                    if (heroClass.get(opponentChoice -1).equals("Paladin")) {
+                                        damagePlayer = heroAt.get((playerChoice - 1) + r.nextInt(5) - 3) - heroDef.get(opponentChoice -1);
+                                    }
+
+                                    if (heroClass.get(opponentChoice -1).equals("Mage") && playerTurnCount % 5 == 0) {
+                                        System.out.println(heroNames.get(opponentChoice -1) + ": I cast shield!");
+                                        damagePlayer = 0;
+                                    }
+
 
                                     System.out.println(heroNames.get(playerChoice - 1) + " attacks " + heroNames.get(opponentChoice - 1) + "!");
 
-                                    System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage!");
+                                    System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage! (Damage negation from armour: " + heroDef.get(opponentChoice -1) + ")");
                                     System.out.println(heroNames.get(opponentChoice - 1) + " has " + (heroHp.get(opponentChoice - 1) - damagePlayer) + " HP left.");
+
                                     heroHp.set(opponentChoice - 1, heroHp.get(opponentChoice - 1) - damagePlayer);
 
                                     System.out.println();
 
                                     if (heroHp.get(opponentChoice - 1) > 0) {
 
-                                        int damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5);
+                                        int damageOpponent;
+
+                                        opponentTurnCount++;
+
+                                        switch (heroClass.get(opponentChoice - 1)) {
+
+
+                                            case "Rouge":
+                                                if (opponentTurnCount % 4 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println("Sneak attack!");
+                                                    damageOpponent = ((heroAt.get(opponentChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(playerChoice -1);
+                                                }
+                                                break;
+
+                                            case "Fighter":
+                                                if (opponentTurnCount % 3 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println("Action Surge! *bonk* *bonk* *bonk*");
+                                                    damageOpponent = (heroAt.get(opponentChoice - 1) + r.nextInt(5) + 8 ) - heroDef.get(playerChoice -1);
+                                                }
+                                                break;
+
+                                            default:
+                                                damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                        }
+
+
+                                        if (heroClass.get(playerChoice -1).equals("Paladin")) {
+                                            damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) -3;
+                                        }
+
+                                        if (heroClass.get(playerChoice -1).equals("Mage") && opponentTurnCount % 5 == 0) {
+                                            System.out.println(heroNames.get(playerChoice -1) + ": I cast shield!");
+                                            damageOpponent = 0;
+                                        }
 
                                         System.out.println(heroNames.get(opponentChoice - 1) + " attacks " + heroNames.get(playerChoice - 1) + "!");
-                                        System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage!");
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage! (Damage negation from armour: " + heroDef.get(playerChoice -1) + ")");
                                         System.out.println(heroNames.get(playerChoice - 1) + " has " + (heroHp.get(playerChoice - 1) - damageOpponent) + " HP left.");
                                         heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
 
@@ -209,6 +296,8 @@ public class Main {
                                 break;
                             }
                             else if (playModi == 1) {
+
+                                System.out.println("The Battle Royale commences!");
 
                                 //battle royale bs
                                 int playerChoice = r.nextInt(heroNumber.size()) + 1;   //random hero...
@@ -240,11 +329,11 @@ public class Main {
                                         playerChoice = r.nextInt(heroNumber.size()) + 1;
                                     } while (playerChoice == opponentChoice || heroHp.get(playerChoice -1) <= 0);
 
-                                    int damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5);
+                                    int damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
 
                                     System.out.println(heroNames.get(playerChoice - 1) + " attacks " + heroNames.get(opponentChoice - 1) + "!");
 
-                                    System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage!");
+                                    System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage! (Damage negation from armour: " + heroDef.get(opponentChoice -1) + ")");
                                     System.out.println(heroNames.get(opponentChoice - 1) + " has " + (heroHp.get(opponentChoice - 1) - damagePlayer) + " HP left.");
                                     heroHp.set(opponentChoice - 1, heroHp.get(opponentChoice - 1) - damagePlayer);
 
@@ -260,10 +349,10 @@ public class Main {
                                             playerChoice = r.nextInt(heroNumber.size()) + 1;
                                         } while (playerChoice == opponentChoice || heroHp.get(playerChoice -1) <= 0);
 
-                                        int damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5);
+                                        int damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
 
                                         System.out.println(heroNames.get(opponentChoice - 1) + " attacks " + heroNames.get(playerChoice - 1) + "!");
-                                        System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage!");
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage! (Damage negation from armour: " + heroDef.get(playerChoice -1) + ")");
                                         System.out.println(heroNames.get(playerChoice - 1) + " has " + (heroHp.get(playerChoice - 1) - damageOpponent) + " HP left.");
                                         heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
 
@@ -295,6 +384,12 @@ public class Main {
                                     }
                                 }
                                 //!important! closes battle royale loop to return to menu, otherwise it loops back to play modi choice
+                                break;
+                            }
+
+                            else if (playModi == 2){
+                                System.out.println("The tournament commences!");
+                                counterTourn ++;
                                 break;
                             }
 
