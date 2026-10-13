@@ -54,14 +54,14 @@ public class BattleRoyale {
 
         System.out.println();
 
-        Scanner heroChoice = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
 
         int playerChoice = 0;
 
         while (true) {
             try {
                 System.out.println("Choose your fighter (Input Hero Number and press Enter.):");
-                playerChoice = heroChoice.nextInt();
+                playerChoice = userInput.nextInt();
 
                 if (playerChoice >= 1 && playerChoice <= heroNumber.size()) {
                     break;
@@ -71,7 +71,7 @@ public class BattleRoyale {
 
             } catch (InputMismatchException e) {
                 System.out.println("Error: Please enter a valid Hero Number!");
-                heroChoice.next();
+                userInput.next();
             }
         }
 
@@ -84,7 +84,7 @@ public class BattleRoyale {
         while (true) {
             try {
                 System.out.println("Choose your opponent or pick one at random? (0 for choice, 1 for random, 2 for Battle Royale):");
-                opponentType = heroChoice.nextInt();
+                opponentType = userInput.nextInt();
 
                 if (opponentType == 0 || opponentType == 1 || opponentType == 2) {
                     break;
@@ -94,7 +94,7 @@ public class BattleRoyale {
 
             } catch (InputMismatchException e) {
                 System.out.println("Error: Please choose a valid modi!");
-                heroChoice.next();
+                userInput.next();
             }
         }
 
@@ -102,7 +102,7 @@ public class BattleRoyale {
             while (true) {
                 try {
                     System.out.println("Choose your opponent (Input Hero Number and press Enter, don't pick your Hero again!):");
-                    opponentChoice = heroChoice.nextInt();
+                    opponentChoice = userInput.nextInt();
 
                     if (opponentChoice >= 1 && opponentChoice <= heroNumber.size() && opponentChoice != playerChoice) {
                         break;
@@ -112,7 +112,7 @@ public class BattleRoyale {
 
                 } catch (InputMismatchException e) {
                     System.out.println("Error: Please enter a valid Hero Number!");
-                    heroChoice.next();
+                    userInput.next();
                 }
             }
         }
