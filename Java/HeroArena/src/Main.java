@@ -3,8 +3,6 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
@@ -85,10 +83,10 @@ public class Main {
 
         while (true) {
             try {
-                System.out.println("Choose your opponent or pick one at random? (1 for choice, 0 for random):");
+                System.out.println("Choose your opponent or pick one at random? (0 for choice, 1 for random):");
                 opponentType = heroChoice.nextInt();
 
-                if (opponentType == 1 || opponentType == 0) {
+                if (opponentType == 0 || opponentType == 1) {
                     break;
                 }
 
@@ -100,7 +98,7 @@ public class Main {
             }
         }
 
-        if (opponentType == 1) {
+        if (opponentType == 0) {
             while (true) {
                 try {
                     System.out.println("Choose your opponent (Input Hero Number and press Enter, don't pick your Hero again!):");
@@ -157,7 +155,7 @@ public class Main {
             }
         }
 
-        if (heroHp.get(playerChoice - 1) < 0) {
+        if (heroHp.get(playerChoice - 1) <= 0) {
             System.out.println(heroNames.get(opponentChoice - 1) + " hat gewonnen! " + heroNames.get(playerChoice - 1) + " wurde besiegt!");
         }
 
