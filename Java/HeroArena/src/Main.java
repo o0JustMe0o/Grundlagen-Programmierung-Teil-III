@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
@@ -156,8 +154,6 @@ public class Main {
 
                                 if (opponentType == 0) {
 
-                                    System.out.println("The battle commences!");
-
                                     while (true) {
                                         try {
                                             System.out.println("Choose your opponent (Input Hero Number and press Enter, don't pick your Hero again!):");
@@ -182,6 +178,8 @@ public class Main {
                                 }
 
                                 System.out.println();
+                                System.out.println("The battle commences!");
+                                System.out.println();
 
                                 int playerTurnCount = 0;
                                 int opponentTurnCount = 0;
@@ -200,6 +198,11 @@ public class Main {
                                             }
                                             else {
                                                 System.out.println(heroNames.get(playerChoice - 1) + ": Sneak attack!");
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
                                                 damagePlayer = ((heroAt.get(playerChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(opponentChoice -1);
                                             }
                                             break;
@@ -207,10 +210,20 @@ public class Main {
                                         case "Fighter":
                                             if (playerTurnCount % 3 != 0) {
                                                 damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
                                             }
                                             else {
                                                 System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
-                                                damagePlayer = (heroAt.get(playerChoice - 1) + r.nextInt(5) + 8 ) - heroDef.get(opponentChoice -1);
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice - 1) + 8;
                                             }
                                             break;
 
@@ -225,15 +238,33 @@ public class Main {
 
                                     if (heroClass.get(opponentChoice -1).equals("Mage") && playerTurnCount % 5 == 0) {
                                         System.out.println(heroNames.get(opponentChoice -1) + ": I cast shield!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
                                         damagePlayer = 0;
                                     }
 
-
                                     System.out.println(heroNames.get(playerChoice - 1) + " attacks " + heroNames.get(opponentChoice - 1) + "!");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
 
                                     System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage! (Damage negation from armour: " + heroDef.get(opponentChoice -1) + ")");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
                                     System.out.println(heroNames.get(opponentChoice - 1) + " has " + (heroHp.get(opponentChoice - 1) - damagePlayer) + " HP left.");
-
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
                                     heroHp.set(opponentChoice - 1, heroHp.get(opponentChoice - 1) - damagePlayer);
 
                                     System.out.println();
@@ -251,6 +282,11 @@ public class Main {
                                                 }
                                                 else {
                                                     System.out.println(heroNames.get(opponentChoice - 1) + ": Sneak attack!");
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
                                                     damageOpponent = ((heroAt.get(opponentChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(playerChoice -1);
                                                 }
                                                 break;
@@ -261,7 +297,12 @@ public class Main {
                                                 }
                                                 else {
                                                     System.out.println(heroNames.get(opponentChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
-                                                    damageOpponent = (heroAt.get(opponentChoice - 1) + r.nextInt(5) + 8 ) - heroDef.get(playerChoice -1);
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) + 8;
                                                 }
                                                 break;
 
@@ -276,26 +317,60 @@ public class Main {
 
                                         if (heroClass.get(playerChoice -1).equals("Mage") && opponentTurnCount % 5 == 0) {
                                             System.out.println(heroNames.get(playerChoice -1) + ": I cast shield!");
+                                            try {
+                                                Thread.sleep(250);
+                                            } catch (InterruptedException e) {
+                                                Thread.currentThread().interrupt();
+                                            }
                                             damageOpponent = 0;
                                         }
 
                                         System.out.println(heroNames.get(opponentChoice - 1) + " attacks " + heroNames.get(playerChoice - 1) + "!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
                                         System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage! (Damage negation from armour: " + heroDef.get(playerChoice -1) + ")");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
                                         System.out.println(heroNames.get(playerChoice - 1) + " has " + (heroHp.get(playerChoice - 1) - damageOpponent) + " HP left.");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
                                         heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
 
                                         System.out.println();
                                     }
                                     else  {
+
                                         System.out.println(heroNames.get(playerChoice - 1) + " wins! " + heroNames.get(opponentChoice - 1) + " has been defeated!");
+                                        System.out.println();
+                                        try {
+                                            Thread.sleep(1000);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
                                         break;
                                     }
                                 }
 
                                 if (heroHp.get(playerChoice - 1) <= 0) {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
                                     System.out.println(heroNames.get(opponentChoice - 1) + " wins! " + heroNames.get(playerChoice - 1) + " has been defeated!");
+                                    System.out.println();
                                 }
                                 break;
+
                             }
                             else if (playModi == 1) {
 
@@ -390,7 +465,599 @@ public class Main {
                             }
 
                             else if (playModi == 2){
+
+                                int tournRoundCount = 1;
+
+                                int winnerRoundOne = 0;
+                                int winnerRoundTwo = 0;
+
+                                System.out.println();
                                 System.out.println("The tournament commences!");
+                                System.out.println();
+
+                                int playerChoice = 1;
+                                int opponentChoice = 2;
+
+                                int playerTurnCount = 0;
+                                int opponentTurnCount = 0;
+
+                                //combat loop
+                                System.out.println("Tournament round " + tournRoundCount + ": " + heroNames.get(playerChoice -1) + " vs " + heroNames.get(opponentChoice -1));
+                                System.out.println();
+
+                                playerTurnCount = 0;
+                                opponentTurnCount = 0;
+
+                                while (heroHp.get(playerChoice -1) > 0 && heroHp.get(opponentChoice - 1) > 0) {
+
+                                    int damagePlayer;
+
+                                    playerTurnCount++;
+
+                                    switch (heroClass.get(playerChoice - 1)) {
+                                        case "Rouge":
+                                            if (playerTurnCount % 4 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                            }
+                                            else {
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Sneak attack!");
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                                damagePlayer = ((heroAt.get(playerChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(opponentChoice -1);
+                                            }
+                                            break;
+
+                                        case "Fighter":
+                                            if (playerTurnCount % 3 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                            }
+                                            else {
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice - 1) + 8;
+                                            }
+                                            break;
+
+                                        default:
+                                            damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                    }
+
+
+                                    if (heroClass.get(opponentChoice -1).equals("Paladin")) {
+                                        damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1) - 3;
+                                    }
+
+                                    if (heroClass.get(opponentChoice -1).equals("Mage") && playerTurnCount % 5 == 0) {
+                                        System.out.println(heroNames.get(opponentChoice -1) + ": I cast shield!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        damagePlayer = 0;
+                                    }
+
+                                    System.out.println(heroNames.get(playerChoice - 1) + " attacks " + heroNames.get(opponentChoice - 1) + "!");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+
+                                    System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage! (Damage negation from armour: " + heroDef.get(opponentChoice -1) + ")");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    System.out.println(heroNames.get(opponentChoice - 1) + " has " + (heroHp.get(opponentChoice - 1) - damagePlayer) + " HP left.");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    heroHp.set(opponentChoice - 1, heroHp.get(opponentChoice - 1) - damagePlayer);
+
+                                    System.out.println();
+
+                                    if (heroHp.get(opponentChoice - 1) > 0) {
+
+                                        int damageOpponent;
+
+                                        opponentTurnCount++;
+
+                                        switch (heroClass.get(opponentChoice - 1)) {
+                                            case "Rouge":
+                                                if (opponentTurnCount % 4 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Sneak attack!");
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                    damageOpponent = ((heroAt.get(opponentChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(playerChoice -1);
+                                                }
+                                                break;
+
+                                            case "Fighter":
+                                                if (opponentTurnCount % 3 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) + 8;
+                                                }
+                                                break;
+
+                                            default:
+                                                damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                        }
+
+
+                                        if (heroClass.get(playerChoice -1).equals("Paladin")) {
+                                            damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) -3;
+                                        }
+
+                                        if (heroClass.get(playerChoice -1).equals("Mage") && opponentTurnCount % 5 == 0) {
+                                            System.out.println(heroNames.get(playerChoice -1) + ": I cast shield!");
+                                            try {
+                                                Thread.sleep(250);
+                                            } catch (InterruptedException e) {
+                                                Thread.currentThread().interrupt();
+                                            }
+                                            damageOpponent = 0;
+                                        }
+
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " attacks " + heroNames.get(playerChoice - 1) + "!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage! (Damage negation from armour: " + heroDef.get(playerChoice -1) + ")");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        System.out.println(heroNames.get(playerChoice - 1) + " has " + (heroHp.get(playerChoice - 1) - damageOpponent) + " HP left.");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
+
+                                        System.out.println();
+                                    }
+                                    else  {
+                                        System.out.println(heroNames.get(playerChoice - 1) + " wins! " + heroNames.get(opponentChoice - 1) + " has been defeated!");
+                                        System.out.println();
+                                        winnerRoundOne = heroNumber.get(playerChoice - 1);
+                                        tournRoundCount ++;
+                                    }
+                                }
+
+                                if (heroHp.get(playerChoice - 1) <= 0) {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    System.out.println(heroNames.get(opponentChoice - 1) + " wins! " + heroNames.get(playerChoice - 1) + " has been defeated!");
+                                    System.out.println();
+                                    winnerRoundOne = heroNumber.get(opponentChoice - 1);
+                                    tournRoundCount ++;
+                                    break;
+                                }
+
+                                //combat loop
+
+                                playerChoice = 3;
+                                opponentChoice = 4;
+                                playerTurnCount = 0;
+                                opponentTurnCount = 0;
+
+                                System.out.println("Tournament round " + tournRoundCount + ": " + heroNames.get(playerChoice -1) + " vs " + heroNames.get(opponentChoice -1));
+                                System.out.println();
+
+                                while (heroHp.get(playerChoice -1) > 0 && heroHp.get(opponentChoice - 1) > 0) {
+
+                                    int damagePlayer;
+
+                                    playerTurnCount++;
+
+                                    switch (heroClass.get(playerChoice - 1)) {
+                                        case "Rouge":
+                                            if (playerTurnCount % 4 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                            }
+                                            else {
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Sneak attack!");
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                                damagePlayer = ((heroAt.get(playerChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(opponentChoice -1);
+                                            }
+                                            break;
+
+                                        case "Fighter":
+                                            if (playerTurnCount % 3 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                            }
+                                            else {
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1) + 8;
+                                            }
+                                            break;
+
+                                        default:
+                                            damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                    }
+
+
+                                    if (heroClass.get(opponentChoice -1).equals("Paladin")) {
+                                        damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1) - 3;
+                                    }
+
+                                    if (heroClass.get(opponentChoice -1).equals("Mage") && playerTurnCount % 5 == 0) {
+                                        System.out.println(heroNames.get(opponentChoice -1) + ": I cast shield!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        damagePlayer = 0;
+                                    }
+
+                                    System.out.println(heroNames.get(playerChoice - 1) + " attacks " + heroNames.get(opponentChoice - 1) + "!");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+
+                                    System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage! (Damage negation from armour: " + heroDef.get(opponentChoice -1) + ")");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    System.out.println(heroNames.get(opponentChoice - 1) + " has " + (heroHp.get(opponentChoice - 1) - damagePlayer) + " HP left.");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    heroHp.set(opponentChoice - 1, heroHp.get(opponentChoice - 1) - damagePlayer);
+
+                                    System.out.println();
+
+                                    if (heroHp.get(opponentChoice - 1) > 0) {
+
+                                        int damageOpponent;
+
+                                        opponentTurnCount++;
+
+                                        switch (heroClass.get(opponentChoice - 1)) {
+                                            case "Rouge":
+                                                if (opponentTurnCount % 4 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Sneak attack!");
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                    damageOpponent = ((heroAt.get(opponentChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(playerChoice -1);
+                                                }
+                                                break;
+
+                                            case "Fighter":
+                                                if (opponentTurnCount % 3 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) + 8;
+                                                }
+                                                break;
+
+                                            default:
+                                                damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                        }
+
+
+                                        if (heroClass.get(playerChoice -1).equals("Paladin")) {
+                                            damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) -3;
+                                        }
+
+                                        if (heroClass.get(playerChoice -1).equals("Mage") && opponentTurnCount % 5 == 0) {
+                                            System.out.println(heroNames.get(playerChoice -1) + ": I cast shield!");
+                                            try {
+                                                Thread.sleep(250);
+                                            } catch (InterruptedException e) {
+                                                Thread.currentThread().interrupt();
+                                            }
+                                            damageOpponent = 0;
+                                        }
+
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " attacks " + heroNames.get(playerChoice - 1) + "!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage! (Damage negation from armour: " + heroDef.get(playerChoice -1) + ")");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        System.out.println(heroNames.get(playerChoice - 1) + " has " + (heroHp.get(playerChoice - 1) - damageOpponent) + " HP left.");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
+
+                                        System.out.println();
+                                    }
+                                    else  {
+                                        System.out.println(heroNames.get(playerChoice - 1) + " wins! " + heroNames.get(opponentChoice - 1) + " has been defeated!");
+                                        System.out.println();
+                                        winnerRoundTwo = heroNumber.get(playerChoice - 1);
+                                        tournRoundCount ++;
+                                    }
+                                }
+
+                                if (heroHp.get(playerChoice - 1) <= 0) {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    System.out.println(heroNames.get(opponentChoice - 1) + " wins! " + heroNames.get(playerChoice - 1) + " has been defeated!");
+                                    System.out.println();
+                                    winnerRoundTwo = heroNumber.get(opponentChoice - 1);
+                                    tournRoundCount ++;
+                                }
+
+                                //combat loop
+
+                                playerChoice = winnerRoundOne;
+                                opponentChoice = winnerRoundTwo;
+                                playerTurnCount = 0;
+                                opponentTurnCount = 0;
+
+                                heroHp.set(0, 120);
+                                heroHp.set(1, 80);
+                                heroHp.set(2, 100);
+                                heroHp.set(3, 90);
+
+                                System.out.println("Tournament final round " + tournRoundCount + ": " + heroNames.get(playerChoice -1) + " vs " + heroNames.get(opponentChoice -1));
+                                System.out.println();
+
+                                while (heroHp.get(playerChoice -1) > 0 && heroHp.get(opponentChoice - 1) > 0) {
+
+                                    int damagePlayer;
+
+                                    playerTurnCount++;
+
+                                    switch (heroClass.get(playerChoice - 1)) {
+                                        case "Rouge":
+                                            if (playerTurnCount % 4 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                            }
+                                            else {
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Sneak attack!");
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                                damagePlayer = ((heroAt.get(playerChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(opponentChoice -1);
+                                            }
+                                            break;
+
+                                        case "Fighter":
+                                            if (playerTurnCount % 3 != 0) {
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                            }
+                                            else {
+                                                System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
+                                                try {
+                                                    Thread.sleep(250);
+                                                } catch (InterruptedException e) {
+                                                    Thread.currentThread().interrupt();
+                                                }
+                                                damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1) + 8;
+                                            }
+                                            break;
+
+                                        default:
+                                            damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
+                                    }
+
+
+                                    if (heroClass.get(opponentChoice -1).equals("Paladin")) {
+                                        damagePlayer = heroAt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1) - 3;
+                                    }
+
+                                    if (heroClass.get(opponentChoice -1).equals("Mage") && playerTurnCount % 5 == 0) {
+                                        System.out.println(heroNames.get(opponentChoice -1) + ": I cast shield!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        damagePlayer = 0;
+                                    }
+
+                                    System.out.println(heroNames.get(playerChoice - 1) + " attacks " + heroNames.get(opponentChoice - 1) + "!");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+
+                                    System.out.println(heroNames.get(playerChoice - 1) + " deals " + heroNames.get(opponentChoice - 1) + " " + damagePlayer + " damage! (Damage negation from armour: " + heroDef.get(opponentChoice -1) + ")");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    System.out.println(heroNames.get(opponentChoice - 1) + " has " + (heroHp.get(opponentChoice - 1) - damagePlayer) + " HP left.");
+                                    try {
+                                        Thread.sleep(250);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    heroHp.set(opponentChoice - 1, heroHp.get(opponentChoice - 1) - damagePlayer);
+
+                                    System.out.println();
+
+                                    if (heroHp.get(opponentChoice - 1) > 0) {
+
+                                        int damageOpponent;
+
+                                        opponentTurnCount++;
+
+                                        switch (heroClass.get(opponentChoice - 1)) {
+                                            case "Rouge":
+                                                if (opponentTurnCount % 4 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Sneak attack!");
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                    damageOpponent = ((heroAt.get(opponentChoice - 1) + r.nextInt(5)) * 2 ) - heroDef.get(playerChoice -1);
+                                                }
+                                                break;
+
+                                            case "Fighter":
+                                                if (opponentTurnCount % 3 != 0) {
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                                }
+                                                else {
+                                                    System.out.println(heroNames.get(opponentChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
+                                                    try {
+                                                        Thread.sleep(250);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                    damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) + 8;
+                                                }
+                                                break;
+
+                                            default:
+                                                damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1);
+                                        }
+
+
+                                        if (heroClass.get(playerChoice -1).equals("Paladin")) {
+                                            damageOpponent = heroAt.get(opponentChoice - 1) + r.nextInt(5) - heroDef.get(playerChoice -1) -3;
+                                        }
+
+                                        if (heroClass.get(playerChoice -1).equals("Mage") && opponentTurnCount % 5 == 0) {
+                                            System.out.println(heroNames.get(playerChoice -1) + ": I cast shield!");
+                                            try {
+                                                Thread.sleep(250);
+                                            } catch (InterruptedException e) {
+                                                Thread.currentThread().interrupt();
+                                            }
+                                            damageOpponent = 0;
+                                        }
+
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " attacks " + heroNames.get(playerChoice - 1) + "!");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        System.out.println(heroNames.get(opponentChoice - 1) + " deals " + heroNames.get(playerChoice - 1) + " " + damageOpponent + " damage! (Damage negation from armour: " + heroDef.get(playerChoice -1) + ")");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        System.out.println(heroNames.get(playerChoice - 1) + " has " + (heroHp.get(playerChoice - 1) - damageOpponent) + " HP left.");
+                                        try {
+                                            Thread.sleep(250);
+                                        } catch (InterruptedException e) {
+                                            Thread.currentThread().interrupt();
+                                        }
+                                        heroHp.set(playerChoice - 1, heroHp.get(playerChoice - 1) - damageOpponent);
+
+                                        System.out.println();
+                                    }
+                                    else  {
+                                        System.out.println(heroNames.get(playerChoice - 1) + " wins the tournament! " + heroNames.get(opponentChoice - 1) + " has been defeated!");
+                                        System.out.println();
+                                        tournRoundCount ++;
+                                    }
+                                }
+
+                                if (heroHp.get(playerChoice - 1) <= 0) {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                    }
+                                    System.out.println(heroNames.get(opponentChoice - 1) + " wins the tournament! " + heroNames.get(playerChoice - 1) + " has been defeated!");
+                                    System.out.println();
+                                    tournRoundCount ++;
+                                }
+
                                 counterTourn ++;
                                 break;
                             }
