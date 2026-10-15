@@ -210,11 +210,6 @@ public class Main {
                                         case "Fighter":
                                             if (playerTurnCount % 3 != 0) {
                                                 damagePlayer = heroAtt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
-                                                try {
-                                                    Thread.sleep(250);
-                                                } catch (InterruptedException e) {
-                                                    Thread.currentThread().interrupt();
-                                                }
                                             }
                                             else {
                                                 System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
@@ -513,11 +508,6 @@ public class Main {
                                         case "Fighter":
                                             if (playerTurnCount % 3 != 0) {
                                                 damagePlayer = heroAtt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
-                                                try {
-                                                    Thread.sleep(250);
-                                                } catch (InterruptedException e) {
-                                                    Thread.currentThread().interrupt();
-                                                }
                                             }
                                             else {
                                                 System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
@@ -706,11 +696,6 @@ public class Main {
                                         case "Fighter":
                                             if (playerTurnCount % 3 != 0) {
                                                 damagePlayer = heroAtt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
-                                                try {
-                                                    Thread.sleep(250);
-                                                } catch (InterruptedException e) {
-                                                    Thread.currentThread().interrupt();
-                                                }
                                             }
                                             else {
                                                 System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
@@ -875,7 +860,7 @@ public class Main {
                                 heroHp.set(2, 100);
                                 heroHp.set(3, 90);
 
-                                System.out.println("Tournament final round " + tournRoundCount + ": " + heroNames.get(playerChoice -1) + " vs " + heroNames.get(opponentChoice -1));
+                                System.out.println("Tournament final round: " + heroNames.get(playerChoice -1) + " vs " + heroNames.get(opponentChoice -1));
                                 System.out.println();
 
                                 while (heroHp.get(playerChoice -1) > 0 && heroHp.get(opponentChoice - 1) > 0) {
@@ -903,11 +888,6 @@ public class Main {
                                         case "Fighter":
                                             if (playerTurnCount % 3 != 0) {
                                                 damagePlayer = heroAtt.get(playerChoice - 1) + r.nextInt(5) - heroDef.get(opponentChoice -1);
-                                                try {
-                                                    Thread.sleep(250);
-                                                } catch (InterruptedException e) {
-                                                    Thread.currentThread().interrupt();
-                                                }
                                             }
                                             else {
                                                 System.out.println(heroNames.get(playerChoice - 1) + ": Action Surge! *bonk* *bonk* *bonk*");
