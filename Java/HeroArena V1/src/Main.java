@@ -28,7 +28,7 @@ public class Main {
             ArrayList<String> heroNames = new ArrayList<>();
             heroNames.add("Bjorn");
             heroNames.add("Mira");
-            heroNames.add("Kael");
+            heroNames.add("Karl");
             heroNames.add("Luna");
 
             ArrayList<String> heroClass = new ArrayList<>();
@@ -38,7 +38,7 @@ public class Main {
             heroClass.add("Mage");      // "I cast shield!" full damage negation every 5 turns
 
             ArrayList<String> classSpecial = new ArrayList<>();
-            classSpecial.add("+3 extra Def (damage reduction)");
+            classSpecial.add("+3 extra Def (damage negation)");
             classSpecial.add("Sneak Attack every 4 turns (double damage)");
             classSpecial.add("Action Surge every 3 turns (+8 damage)");
             classSpecial.add("Shield cast every 5 turns (full damage negation)");
@@ -62,7 +62,6 @@ public class Main {
             heroDef.add(3);
 
             //menu title card
-            System.out.println();
             System.out.println(" _   _                   ___");
             System.out.println("| | | |                 / _ \\");
             System.out.println("| |_| | ___ _ __ ___   / /_\\ \\_ __ ___ _ __   __ _");

@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Hero {
     String heroName;
-    String heroClass;
+    HeroClass heroClass;
     int heroHp;
     int heroAtt;
     int heroDef;
@@ -11,7 +11,7 @@ public class Hero {
 
     public static int countHeroes = 0;
 
-    public Hero(String heroName, String heroClass, int heroHp, int heroAtt, int heroDef) {
+    public Hero(String heroName, HeroClass heroClass, int heroHp, int heroAtt, int heroDef) {
         this.heroName = heroName;
         this.heroClass = heroClass;
         this.heroHp = heroHp;
@@ -23,29 +23,31 @@ public class Hero {
 
     public void showInfo() {
         System.out.println("Name: " + heroName);
-        System.out.println("Class: " + heroClass);
+        System.out.println("Class: " + heroClass.getClassName() + " ∙ " + heroClass.getFlavourText());
         System.out.println("HP: " + heroHp);
         System.out.println("Att: " + heroAtt);
         System.out.println("Def: " + heroDef);
     }
 
-    public void attack() {
+    public int attack() {
         int damage = heroAtt + r.nextInt(5);
         System.out.println(heroName + " attaks for " + damage + " damage.");
+
+        return damage;
     }
 
-    public void takeDamage() {
-        int dealtDamage = 10/*placeholder 10 =opponentAttack damage*/ - heroDef;
-        System.out.println(heroName + " takes " + dealtDamage + " points of damage.");
-        int remainingHp = heroHp - dealtDamage;
-        System.out.println(heroName + " has " + remainingHp + " left.");
-        heroHp = remainingHp;
+    public void takeDamage(int incomingDamage) {
+        int dealtDamage = incomingDamage - heroDef;
+        System.out.println(heroName + " takes " + dealtDamage + " points of damage. (Damage negation from Def: " + heroDef + ")");
+
+        heroHp = heroHp - dealtDamage;
+
+        System.out.println(heroName + " has " + heroHp + " left.");
+        System.out.println();
     }
 
-    public void isDefeted() {
-        if (heroHp <= 0) {
-            System.out.println(heroName + " has been defeted.");
-        }
+    public boolean isDefeated() {
+        return heroHp <= 0;
     }
 
 
