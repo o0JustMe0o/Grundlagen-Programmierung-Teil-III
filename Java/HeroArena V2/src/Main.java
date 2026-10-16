@@ -10,9 +10,9 @@ public class Main {
         System.out.println("Hello and welcome to:");
 
         Scanner input = new Scanner(System.in);
-        Scanner menu = new Scanner(System.in);
 
         int menuChoice = 0;
+        int gameChoice = 0;
 
         while (menuChoice == 0) {
             System.out.println(" _   _                   ___");
@@ -25,97 +25,135 @@ public class Main {
             //https://patorjk.com/software/taag/#p=display&f=Doom&t=Hero+Arena&x=none&v=4&h=4&w=80&we=false for title font design
 
 
-            HeroClass paladin = new HeroClass("Paladin", "+3 extra Def (damage negation)");
-            HeroClass rouge = new HeroClass("Rouge", "Sneak Attack every 4 turns (double damage)");
-            HeroClass fighter = new HeroClass("Fighter", "Action Surge every 3 turns (+8 damage)");
-            HeroClass mage = new HeroClass("Mage", "Shield cast every 5 turns (full damage negation)");
             List<Hero> heroes = new ArrayList<>();
-            heroes.add(new Hero("Bjorn", paladin , 120, 10, 3));
-            heroes.add(new Hero("Mira", rouge, 80, 14, 0));
-            heroes.add(new Hero("Kael", fighter, 100, 12, 0));
-            heroes.add(new Hero("Luna", mage, 90, 13, 3));
+            heroes.add(new Paladin("Bjorn","Paladin","+3 extra Def (damage negation)", 120, 120, 10, 3));
+            heroes.add(new Rogue("Mira","Rogue","Sneak Attack every 4 turns (double damage)", 80,80, 14, 0));
+            heroes.add(new Fighter("Kael","Fighter","Action Surge every 3 turns (+8 damage)", 100,100, 12, 0));
+            heroes.add(new Mage("Luna","Mage","Shield cast every 5 turns (full damage negation)", 90,90, 13, 3));
+            heroes.add(new Hero("Jimmy the Wall","Normie", "Your average Joe (or Jimmy in this case)",50,50, 15, 10));
+            heroes.add(new Cleric("Pious Pete","Cleric", "Casts heal on self at half health (+25 HP).",75,75, 11, 3));
 
             System.out.println("Play (0)");
             System.out.println("Exit (1)");
 
             try {
-                menuChoice = menu.nextInt();
+                menuChoice = input.nextInt();
                 if (menuChoice == 0) {
 
-                    System.out.println("Heroes present: " + Hero.countHeroes);
+                    System.out.println("Heroes present: " + heroes.size());
                     System.out.println();
                     for (Hero hero : heroes) {
                         hero.showInfo();
                         System.out.println();
                     }
 
-                    // OneVsOne
-
-                    OneVsOne oneVsOne = new OneVsOne(heroes);
-
-                    System.out.println("Pick your Hero:");
-
-                    for (int i = 0; i < heroes.size(); i++) {
-                        System.out.println((i + 1) + " - " + heroes.get(i).heroName);
-                    }
-
-                    int playerChoice = 0;
-
                     while (true) {
                         try {
-                            playerChoice = input.nextInt();
-                            if (playerChoice >= 1 && playerChoice <= heroes.size()) {
+                            System.out.println("Choose your play mode:");
+                            System.out.println("Player vs PC (0)");
+                            System.out.println("Tournament (1)");
+
+                            gameChoice = input.nextInt();
+
+                            if (gameChoice == 0) {
+                                // OneVsOne
+
+                                OneVsOne oneVsOne = new OneVsOne(heroes);
+
+                                System.out.println("Pick your Hero:");
+
+                                for (int i = 0; i < heroes.size(); i++) {
+                                    System.out.println((i + 1) + " - " + heroes.get(i).heroName);
+                                }
+
+                                int playerChoice = 0;
+
+                                while (true) {
+                                    try {
+                                        playerChoice = input.nextInt();
+                                        if (playerChoice >= 1 && playerChoice <= heroes.size()) {
+                                            break;
+                                        } System.out.println("Invalid input. Try again.");
+
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Invalid input. Try again.");
+                                        input.next();
+                                    }
+                                }
+
+                                oneVsOne.playerChoice(playerChoice - 1);
+
+                                System.out.println("Pick your Opponent (Don't pick your Hero again):");
+
+                                for (int i = 0; i < heroes.size(); i++) {
+                                    System.out.println((i + 1) + " - " + heroes.get(i).heroName);
+                                }
+
+                                int opponentChoice = 0;
+
+                                while (true) {
+                                    try {
+                                        opponentChoice = input.nextInt();
+                                        if (opponentChoice >= 1 && opponentChoice <= heroes.size() && opponentChoice != playerChoice) {
+                                            break;
+                                        } System.out.println("Invalid input. Try again.");
+
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Invalid input. Try again.");
+                                        input.next();
+                                    }
+                                }
+
+                                oneVsOne.opponentChoice(opponentChoice - 1);
+
+                                oneVsOne.startGame();
+
+                                Hero winner = oneVsOne.determineWinner();
+                                System.out.println(winner.heroName + " wins!");
                                 break;
-                            } System.out.println("Invalid input. Try again.");
+                            }
+
+                            else if (gameChoice == 1) {
+                                //Tournament
+
+                                break;
+                            }
+                            System.out.println("Invalid input. Try again.");
 
                         } catch (InputMismatchException e) {
-                            System.out.println("Invalid input. Try again.");
                             input.next();
                         }
                     }
-
-                    oneVsOne.playerChoice(playerChoice - 1);
-
-                    System.out.println("Pick your Opponent (Don't pick your Hero again):");
-
-                    for (int i = 0; i < heroes.size(); i++) {
-                        System.out.println((i + 1) + " - " + heroes.get(i).heroName);
-                    }
-
-                    int opponentChoice = 0;
-
-                    while (true) {
-                        try {
-                            opponentChoice = input.nextInt();
-                            if (opponentChoice >= 1 && opponentChoice <= heroes.size() && opponentChoice != playerChoice) {
-                                break;
-                            } System.out.println("Invalid input. Try again.");
-
-                        } catch (InputMismatchException e) {
-                            System.out.println("Invalid input. Try again.");
-                            input.next();
-                        }
-                    }
-
-                    oneVsOne.opponentChoice(opponentChoice - 1);
-
-                    oneVsOne.startGame();
-
-                    Hero winner = oneVsOne.determineWinner();
-                    System.out.println(winner.heroName + " wins!");
                 }
                 else if (menuChoice == 1) {
                     System.out.println("Goodbye!");
                     break;
                 }
                 else {
-                    System.out.println("Error: Please enter a valid input!");
+                    System.out.println("Invalid input. Try again.");
+                    menuChoice = 0;
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Try again.");
+                System.out.println("Menu Error");
                 input.next();
             }
         }
+
     }
 }
+
+/*
+⠀  ⠀  (\__/)
+      (•ㅅ•)      Don’t talk to
+  ＿ ノヽ ノ＼_＿     me or my son
+ /　`/ ⌒Ｙ⌒ Ｙ  ヽ     ever again.
+( 　(三ヽ人　 /　  |
+|　ﾉ⌒＼ ￣￣ヽ   ノ
+ヽ＿＿＿＞､＿ _ ／
+    ｜( 王 ﾉ〈   (\__/)
+    /ﾐ`ー――彡\ (•ㅅ•)
+   / ╰     ╯   \/   \>
+
+
+*/
