@@ -8,8 +8,8 @@ public class Cleric extends Hero {
     public int modifyHp(int hp, String heroName) {
         hp += 25;
 
-        if (hp > heroMaxHp) {
-            hp = heroMaxHp;
+        if (hp > getHeroMaxHp()) {
+            hp = getHeroMaxHp();
         }
 
         System.out.println(

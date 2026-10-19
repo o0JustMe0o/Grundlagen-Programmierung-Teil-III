@@ -5,8 +5,8 @@ public class Paladin extends Hero {
     }
 
     public int modifyDef(int dealtDamage, int incomingAttackCount, String heroName){
-        dealtDamage = dealtDamage - 3;
-        System.out.println(heroName + ": My faith protects me! (3 damage negation from class bonus)");
+        dealtDamage = dealtDamage - 2;
+        System.out.println(heroName + ": My faith protects me! (2 damage negation from class bonus)");
 
         return dealtDamage;
     }

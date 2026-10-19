@@ -1,13 +1,13 @@
 import java.util.Random;
 
 public class Hero {
-    String heroName;
-    String heroClass;
-    String flavourText;
-    int heroHp;
-    int heroMaxHp;
-    int heroAtt;
-    int heroDef;
+    private String heroName;
+    private String heroClass;
+    private String flavourText;
+    private int heroHp;
+    private int heroMaxHp;
+    private int heroAtt;
+    private int heroDef;
 
     static Random r = new Random(42);
 
@@ -32,6 +32,18 @@ public class Hero {
         System.out.println("HP: " + heroHp);
         System.out.println("Att: " + heroAtt);
         System.out.println("Def: " + heroDef);
+    }
+
+    public String getHeroName() {
+        return heroName;
+    }
+
+    public int getHeroHp() {
+        return heroHp;
+    }
+
+    public int getHeroMaxHp() {
+        return heroMaxHp;
     }
 
     public int modifyAtt(int damage, int attackCount, String heroName) {
@@ -89,6 +101,13 @@ public class Hero {
 
     public boolean isDefeated() {
         return heroHp <= 0;
+    }
+
+    public void reset() {
+        heroHp = heroMaxHp;
+        attackCount = 0;
+        incomingAttackCounter = 0;
+        healUsed = false;
     }
 }
 

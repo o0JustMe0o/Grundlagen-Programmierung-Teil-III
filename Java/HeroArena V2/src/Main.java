@@ -26,11 +26,11 @@ public class Main {
 
 
             List<Hero> heroes = new ArrayList<>();
-            heroes.add(new Paladin("Bjorn","Paladin","+3 extra Def (damage negation)", 120, 120, 10, 3));
+            heroes.add(new Paladin("Bjorn","Paladin","+2 extra Def (damage negation)", 120, 120, 10, 3));
             heroes.add(new Rogue("Mira","Rogue","Sneak Attack every 4 turns (double damage)", 80,80, 14, 0));
             heroes.add(new Fighter("Kael","Fighter","Action Surge every 3 turns (+8 damage)", 100,100, 12, 0));
             heroes.add(new Mage("Luna","Mage","Shield cast every 5 turns (full damage negation)", 90,90, 13, 3));
-            heroes.add(new Hero("Jimmy the Wall","Normie", "Your average Joe (or Jimmy in this case)",50,50, 15, 10));
+            heroes.add(new Hero("Jimmy the Wall","Normie", "Your average Joe (or Jimmy in this case)",50,50, 15, 8));
             heroes.add(new Cleric("Pious Pete","Cleric", "Casts heal on self at half health (+25 HP).",75,75, 11, 3));
 
             System.out.println("Play (0)");
@@ -56,14 +56,14 @@ public class Main {
                             gameChoice = input.nextInt();
 
                             if (gameChoice == 0) {
-                                // OneVsOne
 
+                                // OneVsOne
                                 OneVsOne oneVsOne = new OneVsOne(heroes);
 
                                 System.out.println("Pick your Hero:");
 
                                 for (int i = 0; i < heroes.size(); i++) {
-                                    System.out.println((i + 1) + " - " + heroes.get(i).heroName);
+                                    System.out.println((i + 1) + " - " + heroes.get(i).getHeroName());
                                 }
 
                                 int playerChoice = 0;
@@ -86,7 +86,7 @@ public class Main {
                                 System.out.println("Pick your Opponent (Don't pick your Hero again):");
 
                                 for (int i = 0; i < heroes.size(); i++) {
-                                    System.out.println((i + 1) + " - " + heroes.get(i).heroName);
+                                    System.out.println((i + 1) + " - " + heroes.get(i).getHeroName());
                                 }
 
                                 int opponentChoice = 0;
@@ -109,12 +109,17 @@ public class Main {
                                 oneVsOne.startGame();
 
                                 Hero winner = oneVsOne.determineWinner();
-                                System.out.println(winner.heroName + " wins!");
+                                System.out.println(winner.getHeroName() + " wins!");
                                 break;
                             }
 
                             else if (gameChoice == 1) {
+
                                 //Tournament
+                                Tournament tournament = new Tournament(heroes);
+
+                                Hero winner = tournament.startTournament();
+                                System.out.println(winner.getHeroName() + " wins the tournament!");
 
                                 break;
                             }
