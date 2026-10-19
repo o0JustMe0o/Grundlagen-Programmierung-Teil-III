@@ -1,7 +1,7 @@
 public class Paladin extends Hero {
 
-    public Paladin(String heroName, String heroClass, String flavourText, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
-        super(heroName, heroClass, flavourText, heroHp, heroMaxHp, heroAtt, heroDef);
+    public Paladin(String heroName, HeroClass heroClass, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
+        super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
     public int modifyDef(int dealtDamage, int incomingAttackCount, String heroName){

@@ -26,12 +26,12 @@ public class Main {
 
 
             List<Hero> heroes = new ArrayList<>();
-            heroes.add(new Paladin("Bjorn","Paladin","+2 extra Def (damage negation)", 120, 120, 10, 3));
-            heroes.add(new Rogue("Mira","Rogue","Sneak Attack every 4 turns (double damage)", 80,80, 14, 0));
-            heroes.add(new Fighter("Kael","Fighter","Action Surge every 3 turns (+8 damage)", 100,100, 12, 0));
-            heroes.add(new Mage("Luna","Mage","Shield cast every 5 turns (full damage negation)", 90,90, 13, 3));
-            heroes.add(new Hero("Jimmy the Wall","Normie", "Your average Joe (or Jimmy in this case)",50,50, 15, 8));
-            heroes.add(new Cleric("Pious Pete","Cleric", "Casts heal on self at half health (+25 HP).",75,75, 11, 3));
+            heroes.add(new Paladin("Bjorn", Hero.HeroClass.PALADIN, 120, 120, 10, 3));
+            heroes.add(new Rogue("Mira", Hero.HeroClass.ROGUE, 80,80, 14, 0));
+            heroes.add(new Fighter("Kael", Hero.HeroClass.FIGHTER, 100,100, 12, 0));
+            heroes.add(new Mage("Luna", Hero.HeroClass.MAGE, 90,90, 13, 3));
+            heroes.add(new Cleric("Pious Pete", Hero.HeroClass.CLERIC, 75,75, 11, 3));
+            heroes.add(new Hero("Jimmy the Wall", Hero.HeroClass.NORMIE, 50,50, 15, 8));
 
             System.out.println("Play (0)");
             System.out.println("Exit (1)");

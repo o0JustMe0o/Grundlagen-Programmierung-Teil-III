@@ -1,7 +1,7 @@
 public class Cleric extends Hero {
 
-    public Cleric(String heroName, String heroClass, String flavourText, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
-        super(heroName, heroClass, flavourText, heroHp, heroMaxHp, heroAtt, heroDef);
+    public Cleric(String heroName, HeroClass heroClass, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
+        super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
     @Override

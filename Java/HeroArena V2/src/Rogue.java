@@ -1,7 +1,7 @@
 public class Rogue extends Hero {
 
-    public Rogue(String heroName, String heroClass, String flavourText, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
-        super(heroName, heroClass, flavourText, heroHp, heroMaxHp, heroAtt, heroDef);
+    public Rogue(String heroName, HeroClass heroClass, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
+        super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
     @Override

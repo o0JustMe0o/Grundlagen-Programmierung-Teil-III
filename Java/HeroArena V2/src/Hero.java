@@ -2,8 +2,24 @@ import java.util.Random;
 
 public class Hero {
     private String heroName;
-    private String heroClass;
-    private String flavourText;
+    public enum HeroClass {
+        PALADIN("Paladin", "+2 extra Def (damage negation)"),
+        ROGUE("Rogue","Sneak Attack every 4 turns (double damage)"),
+        FIGHTER("Fighter","Action Surge every 3 turns (+8 damage)"),
+        MAGE("Mage","Shield cast every 5 turns (full damage negation)"),
+        CLERIC("Cleric","Casts heal on self at half health (+25 HP)."),
+        NORMIE("Normie","Your average Joe (or Jimmy in this case).");
+
+        private final String className;
+        private final String flavourText;
+
+        HeroClass(String className, String flavourText) {
+            this.className = className;
+            this.flavourText = flavourText;
+        }
+
+    }
+    private HeroClass heroClass;
     private int heroHp;
     private int heroMaxHp;
     private int heroAtt;
@@ -16,10 +32,9 @@ public class Hero {
 
     private boolean healUsed = false;
 
-    public Hero(String heroName, String heroClass, String flavourText, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
+    public Hero(String heroName, HeroClass heroClass, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
         this.heroName = heroName;
         this.heroClass = heroClass;
-        this.flavourText = flavourText;
         this.heroHp = heroHp;
         this.heroMaxHp = heroMaxHp;
         this.heroAtt = heroAtt;
@@ -28,7 +43,7 @@ public class Hero {
 
     public void showInfo() {
         System.out.println("Name: " + heroName);
-        System.out.println("Class: " + heroClass + " ∙ " + flavourText);
+        System.out.println("Class: " + heroClass + " ∙ " + heroClass.flavourText);
         System.out.println("HP: " + heroHp);
         System.out.println("Att: " + heroAtt);
         System.out.println("Def: " + heroDef);
@@ -36,10 +51,6 @@ public class Hero {
 
     public String getHeroName() {
         return heroName;
-    }
-
-    public int getHeroHp() {
-        return heroHp;
     }
 
     public int getHeroMaxHp() {
@@ -88,7 +99,7 @@ public class Hero {
 
             heroHp = heroHp - dealtDamage;
 
-            if (!healUsed && "Cleric".equals(heroClass) && heroHp < heroMaxHp / 2 && heroHp > 0) {
+            if (!healUsed && "Cleric".equals(heroClass.className) && heroHp < heroMaxHp / 2 && heroHp > 0) {
                 heroHp = modifyHp(heroHp, heroName);
 
                 healUsed = true;
