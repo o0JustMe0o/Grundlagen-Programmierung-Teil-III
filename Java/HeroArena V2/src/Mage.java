@@ -4,8 +4,8 @@ public class Mage extends Hero {
         super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
-    public int modifyDef(int dealtDamage, int incomingAttackCount, String heroName, String heroClass){
-        if (heroClass.equals("Mage") && incomingAttackCount % 5 == 0) {
+    public int modifyDef(int dealtDamage, int incomingAttackCount, String heroName){
+        if (incomingAttackCount % 5 == 0) {
             dealtDamage = 0;
             System.out.println(heroName + ": I cast shield!");
         }

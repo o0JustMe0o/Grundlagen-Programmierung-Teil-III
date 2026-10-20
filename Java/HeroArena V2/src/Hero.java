@@ -57,6 +57,14 @@ public class Hero {
         return heroMaxHp;
     }
 
+    public boolean getHealUsed() {
+        return healUsed;
+    }
+
+    public void setHealUsed(boolean healUsed) {
+        this.healUsed = healUsed;
+    }
+
     public int modifyAtt(int damage, int attackCount, String heroName) {
         return damage;
     }
@@ -99,11 +107,9 @@ public class Hero {
 
             heroHp = heroHp - dealtDamage;
 
-            if (!healUsed && "Cleric".equals(heroClass.className) && heroHp < heroMaxHp / 2 && heroHp > 0) {
-                heroHp = modifyHp(heroHp, heroName);
+            heroHp = modifyHp(heroHp, heroName);
 
-                healUsed = true;
-            }
+
         }
 
         System.out.println(heroName + " has " + heroHp + " left.");

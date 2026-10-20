@@ -4,6 +4,7 @@ public class Paladin extends Hero {
         super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
+    @Override
     public int modifyDef(int dealtDamage, int incomingAttackCount, String heroName){
         dealtDamage = dealtDamage - 2;
         System.out.println(heroName + ": My faith protects me! (2 damage negation from class bonus)");

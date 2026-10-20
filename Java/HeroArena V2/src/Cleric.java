@@ -4,18 +4,20 @@ public class Cleric extends Hero {
         super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
-    @Override
-    public int modifyHp(int hp, String heroName) {
-        hp += 25;
+    public int modifyHp(int heroHp, String heroName) {
+        if (!getHealUsed() && heroHp < getHeroMaxHp() / 2 && heroHp > 0) {
 
-        if (hp > getHeroMaxHp()) {
-            hp = getHeroMaxHp();
+            int healedHp = heroHp + 25;
+            healedHp = Math.min(healedHp, getHeroMaxHp());
+
+            System.out.println(heroName + " casts Heal and restores 25 HP!");
+
+            setHealUsed(true);
+            return healedHp;
+
+        } else {
+            return heroHp;
         }
 
-        System.out.println(
-                heroName + " casts Heal and restores 25 HP!"
-        );
-
-        return hp;
     }
 }

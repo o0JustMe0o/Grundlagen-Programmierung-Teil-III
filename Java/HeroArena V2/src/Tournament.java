@@ -13,7 +13,7 @@ public class Tournament {
 
         Random shuffleSeed =  new Random(42);
 
-        Collections.shuffle(heroList /*, shuffleSeed*/);
+        Collections.shuffle(heroList , shuffleSeed);
         //Cool Method for randomization: https://www.geeksforgeeks.org/java/collections-shuffle-method-in-java-with-examples/
         //Random shuffleSeed makes Collections.shuffle results repeatable
 
