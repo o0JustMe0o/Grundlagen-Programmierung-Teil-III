@@ -1,12 +1,17 @@
 import java.util.List;
 
-public class OneVsOne {
-    private List<Hero>  heroList;
+public class OneVsOne extends Combat {
+
     private Hero player;
     private Hero opponent;
 
-    public OneVsOne(List<Hero> heroList){
-        this.heroList = heroList;
+    public OneVsOne(List<Hero> heroList) {
+        super(heroList);
+    }
+
+    @Override
+    public String gameMode() {
+        return "OneVsOne";
     }
 
     public void playerChoice(int index) {
@@ -17,26 +22,31 @@ public class OneVsOne {
         opponent = heroList.get(index);
     }
 
-    public void startGame() {
+    @Override
+    public void runCombat() {
+
         while (!player.isDefeated() && !opponent.isDefeated()) {
 
-            int playerDamage = player.attack();
-            opponent.takeDamage(playerDamage);
-
+            player.fight(opponent);
             if (opponent.isDefeated()) {
                 break;
             }
 
-            int opponentDamage = opponent.attack();
-            player.takeDamage(opponentDamage);
+            opponent.fight(player);
         }
     }
 
+    @Override
     public Hero determineWinner() {
-        if (player.isDefeated()) {
+
+        if (!player.isDefeated()) {
+            return player;
+        }
+
+        if (!opponent.isDefeated()) {
             return opponent;
         }
-        return player;
-    }
 
+        return null;
+    }
 }

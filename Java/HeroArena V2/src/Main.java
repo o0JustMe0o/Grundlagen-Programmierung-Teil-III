@@ -26,11 +26,11 @@ public class Main {
 
 
             List<Hero> heroes = new ArrayList<>();
-            heroes.add(new Paladin("Bjorn", Hero.HeroClass.PALADIN, 120, 120, 10, 3));
-            heroes.add(new Rogue("Mira", Hero.HeroClass.ROGUE, 80,80, 14, 0));
-            heroes.add(new Fighter("Kael", Hero.HeroClass.FIGHTER, 100,100, 12, 0));
-            heroes.add(new Mage("Luna", Hero.HeroClass.MAGE, 90,90, 13, 3));
-            heroes.add(new Cleric("Pious Pete", Hero.HeroClass.CLERIC, 75,75, 11, 3));
+            heroes.add(new Paladin("Bjorn", 120, 120, 10, 3));
+            heroes.add(new Rogue("Mira", 80,80, 14, 0));
+            heroes.add(new Fighter("Kael", 100,100, 12, 0));
+            heroes.add(new Mage("Luna", 90,90, 13, 3));
+            heroes.add(new Cleric("Pious Pete", 75,75, 11, 3));
             heroes.add(new Hero("Jimmy the Wall", Hero.HeroClass.NORMIE, 50,50, 15, 8));
 
             System.out.println("Play (0)");
@@ -106,10 +106,8 @@ public class Main {
 
                                 oneVsOne.opponentChoice(opponentChoice - 1);
 
-                                oneVsOne.startGame();
+                                oneVsOne.play();
 
-                                Hero winner = oneVsOne.determineWinner();
-                                System.out.println(winner.getHeroName() + " wins!");
                                 break;
                             }
 
@@ -118,8 +116,7 @@ public class Main {
                                 //Tournament
                                 Tournament tournament = new Tournament(heroes);
 
-                                Hero winner = tournament.startTournament();
-                                System.out.println(winner.getHeroName() + " wins the tournament!");
+                                tournament.play();
 
                                 break;
                             }

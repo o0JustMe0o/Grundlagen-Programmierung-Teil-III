@@ -1,7 +1,7 @@
 public class Fighter extends Hero {
 
-    public Fighter(String heroName, HeroClass heroClass, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
-        super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
+    public Fighter(String heroName, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
+        super(heroName, HeroClass.FIGHTER, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
     @Override

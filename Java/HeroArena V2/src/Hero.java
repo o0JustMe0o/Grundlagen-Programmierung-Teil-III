@@ -43,7 +43,7 @@ public class Hero {
 
     public void showInfo() {
         System.out.println("Name: " + heroName);
-        System.out.println("Class: " + heroClass + " ∙ " + heroClass.flavourText);
+        System.out.println("Class: " + heroClass.className + " ∙ " + heroClass.flavourText);
         System.out.println("HP: " + heroHp);
         System.out.println("Att: " + heroAtt);
         System.out.println("Def: " + heroDef);
@@ -115,6 +115,12 @@ public class Hero {
         System.out.println(heroName + " has " + heroHp + " left.");
         System.out.println();
     }
+
+    public void fight(Hero opponent) {
+        int damage = this.attack();
+        opponent.takeDamage(damage);
+    }
+
 
     public boolean isDefeated() {
         return heroHp <= 0;

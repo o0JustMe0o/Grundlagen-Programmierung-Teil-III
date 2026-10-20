@@ -1,10 +1,12 @@
 public class Cleric extends Hero {
 
-    public Cleric(String heroName, HeroClass heroClass, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
-        super(heroName, heroClass, heroHp, heroMaxHp, heroAtt, heroDef);
+    public Cleric(String heroName, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
+        super(heroName, HeroClass.CLERIC, heroHp, heroMaxHp, heroAtt, heroDef);
     }
 
+    @Override
     public int modifyHp(int heroHp, String heroName) {
+
         if (!getHealUsed() && heroHp < getHeroMaxHp() / 2 && heroHp > 0) {
 
             int healedHp = heroHp + 25;

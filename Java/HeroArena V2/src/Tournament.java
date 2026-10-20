@@ -2,14 +2,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Tournament {
-    private List<Hero> heroList;
-
-    public Tournament(List<Hero> heroList) {
-        this.heroList = heroList;
+public class Tournament extends Combat{
+    public String gameMode() {
+        return "Tournament";
     }
+    public Tournament(List<Hero> heroList) {
+        super(heroList);
+    }
+    private Hero tournamentWinner;
 
-    public Hero startTournament() {
+    @Override
+    public void runCombat() {
 
         Random shuffleSeed =  new Random(42);
 
@@ -27,9 +30,12 @@ public class Tournament {
         System.out.println("~ Round 1! " + heroList.get(0).getHeroName() + " VS " + heroList.get(1).getHeroName() + " ~");
         System.out.println();
 
-        roundOne.startGame();
+        roundOne.runCombat();
 
         Hero winnerOne = roundOne.determineWinner();
+
+        System.out.println(winnerOne.getHeroName() + "wins the Round!");
+        System.out.println();
 
         //Round 2
 
@@ -41,9 +47,12 @@ public class Tournament {
         System.out.println("~ Round 2! " + heroList.get(2).getHeroName() + " VS " + heroList.get(3).getHeroName() + " ~");
         System.out.println();
 
-        roundTwo.startGame();
+        roundTwo.runCombat();
 
         Hero winnerTwo = roundTwo.determineWinner();
+
+        System.out.println(winnerTwo.getHeroName() + " wins the Round!");
+        System.out.println();
 
         //List of winners from Round 1 and 2
         List<Hero> finalists = List.of(winnerOne, winnerTwo);
@@ -62,10 +71,14 @@ public class Tournament {
         System.out.println("~ Final round! " + finalists.get(0).getHeroName() + " VS " + finalists.get(1).getHeroName() + " ~");
         System.out.println();
 
-        roundFinal.startGame();
+        roundFinal.runCombat();
 
-        Hero winnerFinal = roundFinal.determineWinner();
-
-        return winnerFinal;
+        tournamentWinner = roundFinal.determineWinner();
     }
+
+    @Override
+    public Hero determineWinner() {
+        return tournamentWinner;
+    }
+
 }
