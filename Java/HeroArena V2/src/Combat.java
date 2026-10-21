@@ -21,9 +21,8 @@ public abstract class Combat {
 
         Hero winner = determineWinner();
 
-        System.out.println(
-                winner.getHeroName() + " wins the " + gameMode() + "!"
-        );
+        System.out.println(winner.getHeroName() + " wins the " + gameMode() + "!");
+        System.out.println();
     }
 }
 

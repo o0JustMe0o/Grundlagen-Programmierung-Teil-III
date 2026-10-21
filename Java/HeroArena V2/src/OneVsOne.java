@@ -1,17 +1,12 @@
 import java.util.List;
 
 public class OneVsOne extends Combat {
-
+    public String gameMode() { return "One vs One";}
     private Hero player;
     private Hero opponent;
 
     public OneVsOne(List<Hero> heroList) {
         super(heroList);
-    }
-
-    @Override
-    public String gameMode() {
-        return "OneVsOne";
     }
 
     public void playerChoice(int index) {

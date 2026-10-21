@@ -6,19 +6,16 @@ public class Tournament extends Combat{
     public String gameMode() {
         return "Tournament";
     }
+    private Hero tournamentWinner;
+
     public Tournament(List<Hero> heroList) {
         super(heroList);
     }
-    private Hero tournamentWinner;
 
     @Override
     public void runCombat() {
 
-        Random shuffleSeed =  new Random(42);
-
-        Collections.shuffle(heroList , shuffleSeed);
-        //Cool Method for randomization: https://www.geeksforgeeks.org/java/collections-shuffle-method-in-java-with-examples/
-        //Random shuffleSeed makes Collections.shuffle results repeatable
+        Collections.shuffle(heroList , Hero.getRandom());
 
         //Round 1
 
@@ -58,8 +55,8 @@ public class Tournament extends Combat{
         List<Hero> finalists = List.of(winnerOne, winnerTwo);
 
         //Reset Heroes
-        winnerOne.reset();
-        winnerTwo.reset();
+        winnerOne.resetHero();
+        winnerTwo.resetHero();
 
         //Final Round
 

@@ -52,12 +52,11 @@ public class Main {
                             System.out.println("Choose your play mode:");
                             System.out.println("Player vs PC (0)");
                             System.out.println("Tournament (1)");
+                            System.out.println("Battle Royale (2)");
 
                             gameChoice = input.nextInt();
 
                             if (gameChoice == 0) {
-
-                                // OneVsOne
                                 OneVsOne oneVsOne = new OneVsOne(heroes);
 
                                 System.out.println("Pick your Hero:");
@@ -112,14 +111,21 @@ public class Main {
                             }
 
                             else if (gameChoice == 1) {
-
-                                //Tournament
                                 Tournament tournament = new Tournament(heroes);
 
                                 tournament.play();
 
                                 break;
                             }
+
+                            else if (gameChoice == 2) {
+                                BattleRoyale battleRoyale = new BattleRoyale(heroes);
+
+                                battleRoyale.play();
+
+                                break;
+                            }
+
                             System.out.println("Invalid input. Try again.");
 
                         } catch (InputMismatchException e) {

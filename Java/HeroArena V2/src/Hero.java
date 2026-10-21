@@ -25,11 +25,9 @@ public class Hero {
     private int heroAtt;
     private int heroDef;
 
-    static Random r = new Random(42);
-
-    private int attackCount = 0;
+    public static Random r = new Random(42);
+    private int attackCounter = 0;
     private int incomingAttackCounter = 0;
-
     private boolean healUsed = false;
 
     public Hero(String heroName, HeroClass heroClass, int heroHp, int heroMaxHp, int heroAtt, int heroDef) {
@@ -51,6 +49,10 @@ public class Hero {
 
     public String getHeroName() {
         return heroName;
+    }
+
+    public int getHeroHp() {
+        return heroHp;
     }
 
     public int getHeroMaxHp() {
@@ -77,13 +79,17 @@ public class Hero {
         return hp;
     }
 
+    public static Random getRandom() {
+        return r;
+    }
+
     public int attack() {
 
-        attackCount++;
+        attackCounter++;
 
         int damage = heroAtt + r.nextInt(5);
 
-        damage = modifyAtt(damage, attackCount, heroName);
+        damage = modifyAtt(damage, attackCounter, heroName);
 
         System.out.println(heroName + " attaks for " + damage + " damage.");
 
@@ -126,9 +132,9 @@ public class Hero {
         return heroHp <= 0;
     }
 
-    public void reset() {
+    public void resetHero() {
         heroHp = heroMaxHp;
-        attackCount = 0;
+        attackCounter = 0;
         incomingAttackCounter = 0;
         healUsed = false;
     }
