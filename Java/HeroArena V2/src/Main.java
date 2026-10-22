@@ -33,7 +33,11 @@ public class Main {
             heroes.add(new Cleric("Pious Pete", 75,75, 11, 3));
             heroes.add(new Hero("Jimmy the Wall", Hero.HeroClass.NORMIE, 50,50, 15, 8));
             heroes.add(new Rogue("Lee", 70,80, 15, 3));
-            //heroes.add(new Fighter("Sammy", 80,100, 18, 0));
+            heroes.add(new Fighter("Sammy", 80,100, 18, 0));
+            heroes.add(new Paladin("A", 120, 120, 10, 3));
+            heroes.add(new Rogue("B", 80,80, 14, 0));
+            heroes.add(new Fighter("C", 100,100, 12, 0));
+            //heroes.add(new Mage("D", 90,90, 13, 3));
 
             System.out.println("Play (0)");
             System.out.println("Exit (1)");
