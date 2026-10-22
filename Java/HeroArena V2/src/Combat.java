@@ -16,6 +16,7 @@ public abstract class Combat {
     public void play() { //Methode für Main mit Ausgabe des Gewinners
 
         System.out.println("~ " + gameMode() + " ~");
+        System.out.println();
 
         runCombat();
 

@@ -32,6 +32,8 @@ public class Main {
             heroes.add(new Mage("Luna", 90,90, 13, 3));
             heroes.add(new Cleric("Pious Pete", 75,75, 11, 3));
             heroes.add(new Hero("Jimmy the Wall", Hero.HeroClass.NORMIE, 50,50, 15, 8));
+            heroes.add(new Rogue("Lee", 70,80, 15, 3));
+            //heroes.add(new Fighter("Sammy", 80,100, 18, 0));
 
             System.out.println("Play (0)");
             System.out.println("Exit (1)");
@@ -80,7 +82,7 @@ public class Main {
                                     }
                                 }
 
-                                oneVsOne.playerChoice(playerChoice - 1);
+                                oneVsOne.heroOneChoice(playerChoice - 1);
 
                                 System.out.println("Pick your Opponent (Don't pick your Hero again):");
 
@@ -103,7 +105,7 @@ public class Main {
                                     }
                                 }
 
-                                oneVsOne.opponentChoice(opponentChoice - 1);
+                                oneVsOne.heroTwoChoice(opponentChoice - 1);
 
                                 oneVsOne.play();
 

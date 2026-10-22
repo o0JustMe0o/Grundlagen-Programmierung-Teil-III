@@ -114,8 +114,6 @@ public class Hero {
             heroHp = heroHp - dealtDamage;
 
             heroHp = modifyHp(heroHp, heroName);
-
-
         }
 
         System.out.println(heroName + " has " + heroHp + " left.");

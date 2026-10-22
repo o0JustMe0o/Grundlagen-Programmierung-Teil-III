@@ -1,6 +1,6 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Tournament extends Combat{
     public String gameMode() {
@@ -17,6 +17,62 @@ public class Tournament extends Combat{
 
         Collections.shuffle(heroList , Hero.getRandom());
 
+        if (heroList.size() >= 4) {
+
+            while (heroList.size() % 4 != 0) {
+                heroList.remove(0);
+            }
+
+            while(heroList.size() > 2){
+
+                for (Hero hero : heroList) {
+                    hero.resetHero();
+                }
+
+                for (int i = 0; i < heroList.size(); i = i+1) {
+
+                    Hero heroOne = heroList.get(i);
+                    Hero heroTwo = heroList.get(i+1);
+
+                    Hero winner;
+
+                    System.out.println("~ Round " + (i+1) + "! " + heroOne.getHeroName() + " VS " + heroTwo.getHeroName() + " ~");
+                    System.out.println();
+
+                    OneVsOne round = new OneVsOne(heroOne, heroTwo);
+
+                    round.runCombat();
+
+                    heroList.removeIf(hero -> hero.getHeroHp() <= 0);
+
+                    winner = round.determineWinner();
+
+                    System.out.println(winner.getHeroName() + " wins the Round!");
+                    System.out.println();
+                }
+            }
+
+            heroList.getFirst().resetHero();
+            heroList.getLast().resetHero();
+
+            OneVsOne roundFinal = new OneVsOne(heroList);
+
+            roundFinal.heroOneChoice(0);
+            roundFinal.heroTwoChoice(1);
+
+            System.out.println("~ Final round! " + heroList.get(0).getHeroName() + " VS " + heroList.get(1).getHeroName() + " ~");
+            System.out.println();
+
+            roundFinal.runCombat();
+
+            tournamentWinner = roundFinal.determineWinner();
+
+        } else {
+            System.out.println("Not enough heroes to play. Minimum of 4 needed.");
+        }
+
+
+        /*
         //Round 1
 
         OneVsOne roundOne = new OneVsOne(heroList);
@@ -71,6 +127,7 @@ public class Tournament extends Combat{
         roundFinal.runCombat();
 
         tournamentWinner = roundFinal.determineWinner();
+        */
     }
 
     @Override

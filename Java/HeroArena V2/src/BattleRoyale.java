@@ -23,12 +23,10 @@ public class BattleRoyale extends Combat {
         Collections.shuffle(heroList , Hero.getRandom());
 
         while (heroList.size() > 1) {
-            do {
-                heroOne = heroList.get(Hero.getRandom().nextInt(heroList.size()));
-            } while (heroOne.getHeroHp() <= 0);
+            heroOne = heroList.get(Hero.getRandom().nextInt(heroList.size()));
             do {
                 heroTwo = heroList.get(Hero.getRandom().nextInt(heroList.size()));
-            } while (heroTwo == heroOne || heroTwo.getHeroHp() <= 0);
+            } while (heroTwo == heroOne);
 
             heroOne.fight(heroTwo);
 

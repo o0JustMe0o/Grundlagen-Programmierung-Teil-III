@@ -9,12 +9,19 @@ public class OneVsOne extends Combat {
         super(heroList);
     }
 
-    public void playerChoice(int index) {
+    public void heroOneChoice(int index) {
         player = heroList.get(index);
     }
 
-    public void opponentChoice(int index) {
+    public void heroTwoChoice(int index) {
         opponent = heroList.get(index);
+    }
+
+    public OneVsOne(Hero player, Hero opponent) {
+        super(List.of(player, opponent));
+
+        this.player = player;
+        this.opponent = opponent;
     }
 
     @Override
